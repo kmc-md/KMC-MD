@@ -1,0 +1,18 @@
+integrator  = steep
+nstcgsteep  = 100
+define      = -DFLEXIBLE
+emtol       = 100
+emstep      = 0.01
+nsteps      = 1000000000
+
+nstlist         = 1
+cutoff-scheme   = Verlet
+ns_type         = grid
+coulombtype     = PME
+rcoulomb        = 1.4
+rvdw            = 1.4
+pbc             = xyz
+;constraints              = hbonds
+;constraints              = all-bonds
+;constraint-algorithm     = lincs
+;continuation             = no
