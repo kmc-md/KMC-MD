@@ -16,14 +16,23 @@ Our framework leverages MD to maintain a Boltzmann distribution of states, and K
 
 # KMC stage
 The KMC stage starts with parsing the quilibrated structure and topology. The local environment of each H site of PVC is assessed using the rate equation below:
-r = Ck * (e^{\frac{E_a}{RT}}\),
+```
+r = Ck * e^(Ea/RT),
 ```
 
 where 
 
 - `C = 1` when `d > rc`,
-- otherwise, `C = (e^{-\frac{d}{r_c}}\)`.
+- otherwise, `C = e^(-d/rc)`.
 
+```
+
+To represent the exponentials and fractions more clearly, you might write:
+
+- \(e^{\frac{E_a}{RT}}\) for the exponential term,
+- \(e^{-\frac{d}{r_c}}\) for the conditional definition of \(C\).
+
+```
 where r represents the reaction rate (s-1), k is the Arrhenius prefactor (s-1), Ea is the activation energy (kJmol-1), R is the universal gas constant, T is the system temperature, d is the distance between the H atom of PVC and O atom of NaOH, and rc is a predetermined cutoff radius of 0.4 nm based on the first solvation shell. 
 Once the reaction rates are calculated for each H site of PVC, a global event list is assembled. A reaction event is then selected based on the Metropolis algorithm49 such that:
 ∑_(j=1)^k▒R_ij ≥u_2 R_t  ≥ ∑_(j=1)^(k-1)▒R_ij 									(3)
