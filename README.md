@@ -17,13 +17,13 @@ Our framework leverages MD to maintain a Boltzmann distribution of states, and K
 # KMC stage
 The KMC stage starts with parsing the quilibrated structure and topology. The local environment of each H site of PVC is assessed using the rate equation below:
 ```
-r = Ck * e^(Ea/RT),
+r = Ck * \(e^{\frac{E_a}{RT}}\),
 ```
 
 where 
 
 - `C = 1` when `d > rc`,
-- otherwise, `C = e^(-d/rc)`.
+- otherwise, `C = \(e^{-\frac{d}{r_c}}\)`.
 
 ```
 
