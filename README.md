@@ -1,5 +1,5 @@
 # KMC-MD
-An integrated Off-Lattice Kinetic Monte Carlo (KMC)-Molecular Dynamics (MD) Framework for modeling PVC dehydrochlorination process
+An Integrated Off-Lattice Kinetic Monte Carlo (KMC)-Molecular Dynamics (MD) Framework for modeling PVC dehydrochlorination process
 
 # Please note: 
 The code was run on a GeForce RTX 3090 using a 16-core GPU with the following software installed
