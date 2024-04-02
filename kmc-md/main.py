@@ -1498,7 +1498,7 @@ def apply_charge_correction(modified_lines, total_charge, hydrogen_indices):
 # Display on terminal
 def display_initial_stats(u, base_dir):
     terminal_width = shutil.get_terminal_size().columns
-    title = pyfiglet.figlet_format("PolySimKMC", font="small")
+    title = pyfiglet.figlet_format("KMC-MD", font="small")
     centered_title = '\n'.join([line.center(terminal_width) for line in title.split('\n')])
     print(centered_title)
     subtext = "A Composite Kinetic Monte Carlo (KMC) - Molecular Dynamics (MD) Model for Analyzing PVC Dehydrochlorination Process (v1.0)"
