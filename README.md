@@ -1,7 +1,7 @@
 # PolySimKMC
 An Integrated Off-Lattice Kinetic Monte Carlo (KMC)-Molecular Dynamics (MD) Framework for modeling PVC dehydrochlorination process
 
-# Please note: 
+## Please note: 
 The code was run on a GeForce RTX 3090 using a 16-core GPU with the following software installed:
 - GROMACS v. 2022.4 (https://www.gromacs.org/)
 - Python3 3.10.12 (https://www.python.org/downloads/release/python-31012/)
@@ -9,12 +9,12 @@ The code was run on a GeForce RTX 3090 using a 16-core GPU with the following so
 
 Please check lines 46-64 of kmc-md/main.py file for the necessary Python packages to be installed.
 
-# How does it work?
+## How does it work?
 ![image](https://github.com/kmc-md/KMC-MD/assets/165834656/33e70717-1763-467c-92c6-ed30997e6262)
 
 Our framework leverages MD to maintain a Boltzmann distribution of states, and KMC to model reactions and structural changes efficiently. Integrating high-resolution techniques such as Molecular Dynamics (MD) with KMC is crucial for accurately maintaining the system in thermodynamically relevant configurations on its potential energy surface (PES).  On the other hand, atomistic MD simulations, while detailed, are limited by the short time steps (1 fs = 10<sup>-15</sup> s) to accurately capture atomic vibrations, in that way restricting simulations to microseconds. Overall, the inherent limitations of MD necessitate a combination with KMC to both preserve the atomic-scale detail and extend the simulation timescales significantly (10<sup>3</sup> – 10<sup>6</sup> s).
 
-# KMC stage
+### KMC stage
 The KMC stage starts with parsing the quilibrated structure and topology. The local environment of each H site of PVC is assessed using the rate equation below:
 
 ![fig16](https://github.com/kmc-md/KMC-MD/assets/165834656/6ccfb48d-866b-48b5-9f8a-684c356c8006)
@@ -31,11 +31,11 @@ where k is an integer corresponding to the selected reaction event, u2 is a seco
 where Δt is the time increment, u1 is a uniformly distributed random number in the range [0, 1] and Rt is the cumulative rate from the global event list. 
 The spatial and bonded interaction parameters of each atom are also updated.
 
-# MD stage
+### MD stage
 The MD stage is initiated to relax residual atomic forces (since our off-lattice approach allows atoms to move freely in 3D space), capture rapid concerted moves and atomic-scale phenomena essential to understanding the DHC kinetics. The output structure from the KMC stage is subjected to an initial energy minimization step via the steepest descent algorithm to an energy tolerance (Etol) < 500 kJmol<sup>-1</sup>nm<sup>-1</sup> to resolve short interatomic distances and prevent numerical instabilities. This is followed by a 50 ps NVT ensemble run takes place to thermalize the system to the desired temperature using the velocity rescaling thermostat.41 Subsequently, a second energy minimization step, again using the steepest descent algorithm further relaxes the system to Etol < 100kJmol<sup>-1</sup>nm<sup>-1</sup> to allow for larger time steps that enhance its time-advancing capabilities. 
 The system is then equilibrated in the NPT ensemble for 500 ps to resolve any remaining unstable interatomic forces.
 
-# Instructions for Running KMC-MD Simulation:
+## Instructions for Running KMC-MD Simulation:
 This script was created for the execution of Kinetic Monte Carlo (KMC) coupled with Molecular Dynamics (MD) simulations, for studying the dehydrochlorination (DHC) process of PVC. 
 
 Key Configuration Parameters:
@@ -78,7 +78,7 @@ Key Configuration Parameters:
 
 Ensure that all modifications align with the specific requirements of your simulation.
 
-# References
+## References
 1. Olowookere F.V. and C.H. Turner, An Integrated Off-Lattice Kinetic Monte Carlo (KMC)-Molecular Dynamics (MD) Framework for Modeling Polyvinyl Chloride Dehydrochlorination (manuscript in progress)
 2. Metropolis, N. and S. Ulam, The monte carlo method. Journal of the American statistical association, 1949, 44 (247),  335-341.
 3. Van Rossum, G. and F.L. Drake, Python/C Api manual-python 3. 2009.
