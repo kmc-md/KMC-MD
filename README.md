@@ -16,27 +16,20 @@ Our framework leverages MD to maintain a Boltzmann distribution of states, and K
 
 # KMC stage
 The KMC stage starts with parsing the quilibrated structure and topology. The local environment of each H site of PVC is assessed using the rate equation below:
-```
-r = Ck * e^(Ea/RT),
-```
+![fig15](https://github.com/kmc-md/KMC-MD/assets/165834656/2cd11334-2dd8-482c-8b80-6f91784ffee2)
 
-where 
-
-- `C = 1` when `d > rc`,
-- otherwise, `C = e^(-d/rc)`.
-
-```
-where r represents the reaction rate (s-1), k is the Arrhenius prefactor (s-1), Ea is the activation energy (kJmol-1), R is the universal gas constant, T is the system temperature, d is the distance between the H atom of PVC and O atom of NaOH, and rc is a predetermined cutoff radius of 0.4 nm based on the first solvation shell. 
-Once the reaction rates are calculated for each H site of PVC, a global event list is assembled. A reaction event is then selected based on the Metropolis algorithm49 such that:
-&sum;<sub>j=1</sub><sup>k</sup> R<sub>ij</sub> &ge; u<sub>2</sub> R<sub>t</sub> &ge; &sum;<sub>j=1</sub><sup>k-1</sup> R<sub>ij</sub>
+where r represents the reaction rate (s<sup>-1</sup>), k is the Arrhenius prefactor (s<sup>-1</sup>), Ea is the activation energy (kJmol<sup>-1</sup>), R is the universal gas constant, T is the system temperature, d is the distance between the H atom of PVC and O atom of NaOH, and rc is a predetermined cutoff radius of 0.4 nm based on the first solvation shell. 
+Once the reaction rates are calculated for each H site of PVC, a global event list is assembled. A reaction event is then selected based on the Metropolis algorithm such that:
+![fig13](https://github.com/kmc-md/KMC-MD/assets/165834656/2ad9595f-f59f-4838-9687-c0f4e04311bf)
 
 where k is an integer corresponding to the selected reaction event, u2 is a second uniformly distributed random number within [0,1] and Rij is the rate of the system moving from state Si to state Sj.  Upon selecting an event, the simulation clock is then stochastically advanced to select and implement the reaction using the formula:
-Δt=  (-ln⁡(u_1))/R_t 												(4)
+![fig14](https://github.com/kmc-md/KMC-MD/assets/165834656/8c7526e8-caa7-424c-b2bf-683eedd333a5)
+
 where Δt is the time increment, u1 is a uniformly distributed random number in the range [0, 1] and Rt is the cumulative rate from the global event list. 
 The spatial and bonded interaction parameters of each atom are also updated.
 
 # MD stage
-The MD stage is initiated to relax residual atomic forces (since our off-lattice approach allows atoms to move freely in 3D space), capture rapid concerted moves and atomic-scale phenomena essential to understanding the DHC kinetics. The output structure from the KMC stage is subjected to an initial energy minimization step via the steepest descent algorithm to an energy tolerance (Etol) < 500 kJmol-1nm-1 to resolve short interatomic distances and prevent numerical instabilities. This is followed by a 50 ps NVT ensemble run takes place to thermalize the system to the desired temperature using the velocity rescaling thermostat.41 Subsequently, a second energy minimization step, again using the steepest descent algorithm further relaxes the system to Etol < 100kJ mol-1nm-1 to allow for larger time steps that enhance its time-advancing capabilities. 
+The MD stage is initiated to relax residual atomic forces (since our off-lattice approach allows atoms to move freely in 3D space), capture rapid concerted moves and atomic-scale phenomena essential to understanding the DHC kinetics. The output structure from the KMC stage is subjected to an initial energy minimization step via the steepest descent algorithm to an energy tolerance (Etol) < 500 kJmol<sup>-1</sup>nm<sup>-1</sup> to resolve short interatomic distances and prevent numerical instabilities. This is followed by a 50 ps NVT ensemble run takes place to thermalize the system to the desired temperature using the velocity rescaling thermostat.41 Subsequently, a second energy minimization step, again using the steepest descent algorithm further relaxes the system to Etol < 100kJmol<sup>-1</sup>nm<sup>-1</sup> to allow for larger time steps that enhance its time-advancing capabilities. 
 The system is then equilibrated in the NPT ensemble for 500 ps to resolve any remaining unstable interatomic forces.
 
 # Instructions for Running KMC-MD Simulation:
