@@ -1,4 +1,4 @@
-# KMC-MD
+# PolySimKMC
 An Integrated Off-Lattice Kinetic Monte Carlo (KMC)-Molecular Dynamics (MD) Framework for modeling PVC dehydrochlorination process
 
 # Please note: 
