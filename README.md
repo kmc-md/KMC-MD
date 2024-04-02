@@ -12,7 +12,11 @@ Please check lines 46-64 of kmc-md/main.py file for the necessary Python package
 ## How does it work?
 ![image](https://github.com/kmc-md/KMC-MD/assets/165834656/33e70717-1763-467c-92c6-ed30997e6262)
 
-Our framework leverages MD to maintain a Boltzmann distribution of states, and KMC to model reactions and structural changes efficiently. Integrating high-resolution techniques such as Molecular Dynamics (MD) with KMC is crucial for accurately maintaining the system in thermodynamically relevant configurations on its potential energy surface (PES).  On the other hand, atomistic MD simulations, while detailed, are limited by the short time steps (1 fs = 10<sup>-15</sup> s) to accurately capture atomic vibrations, in that way restricting simulations to microseconds. Overall, the inherent limitations of MD necessitate a combination with KMC to both preserve the atomic-scale detail and extend the simulation timescales significantly (10<sup>3</sup> – 10<sup>6</sup> s).
+Our framework leverages MD to maintain a Boltzmann distribution of states, and KMC to model reactions and structural changes efficiently. 
+
+Integrating high-resolution techniques such as Molecular Dynamics (MD) with KMC is crucial for accurately maintaining the system in thermodynamically relevant configurations on its potential energy surface (PES).  On the other hand, atomistic MD simulations, while detailed, are limited by the short time steps (1 fs = 10<sup>-15</sup> s) to accurately capture atomic vibrations, in that way restricting simulations to microseconds. 
+
+Overall, the inherent limitations of MD necessitate a combination with KMC to both preserve the atomic-scale detail and extend the simulation timescales significantly (10<sup>3</sup> – 10<sup>6</sup> s).
 
 ### KMC stage
 The KMC stage starts with parsing the quilibrated structure and topology. The local environment of each H site of PVC is assessed using the rate equation below:
@@ -20,7 +24,9 @@ The KMC stage starts with parsing the quilibrated structure and topology. The lo
 ![fig16](https://github.com/kmc-md/KMC-MD/assets/165834656/6ccfb48d-866b-48b5-9f8a-684c356c8006)
 
 where r represents the reaction rate (s<sup>-1</sup>), k is the Arrhenius prefactor (s<sup>-1</sup>), Ea is the activation energy (kJmol<sup>-1</sup>), R is the universal gas constant, T is the system temperature, d is the distance between the H atom of PVC and O atom of NaOH, and rc is a predetermined cutoff radius of 0.4 nm based on the first solvation shell. 
-Once the reaction rates are calculated for each H site of PVC, a global event list is assembled. A reaction event is then selected based on the Metropolis algorithm such that:
+Once the reaction rates are calculated for each H site of PVC, a global event list is assembled. 
+
+A reaction event is then selected based on the Metropolis algorithm such that:
 
 ![fig13](https://github.com/kmc-md/KMC-MD/assets/165834656/2ad9595f-f59f-4838-9687-c0f4e04311bf)
 
@@ -32,7 +38,10 @@ where Δt is the time increment, u1 is a uniformly distributed random number in 
 The spatial and bonded interaction parameters of each atom are also updated.
 
 ### MD stage
-The MD stage is initiated to relax residual atomic forces (since our off-lattice approach allows atoms to move freely in 3D space), capture rapid concerted moves and atomic-scale phenomena essential to understanding the DHC kinetics. The output structure from the KMC stage is subjected to an initial energy minimization step via the steepest descent algorithm to an energy tolerance (Etol) < 500 kJmol<sup>-1</sup>nm<sup>-1</sup> to resolve short interatomic distances and prevent numerical instabilities. This is followed by a 50 ps NVT ensemble run takes place to thermalize the system to the desired temperature using the velocity rescaling thermostat.41 Subsequently, a second energy minimization step, again using the steepest descent algorithm further relaxes the system to Etol < 100kJmol<sup>-1</sup>nm<sup>-1</sup> to allow for larger time steps that enhance its time-advancing capabilities. 
+The MD stage is initiated to relax residual atomic forces (since our off-lattice approach allows atoms to move freely in 3D space), capture rapid concerted moves and atomic-scale phenomena essential to understanding the DHC kinetics. The output structure from the KMC stage is subjected to an initial energy minimization step via the steepest descent algorithm to an energy tolerance (Etol) < 500 kJmol<sup>-1</sup>nm<sup>-1</sup> to resolve short interatomic distances and prevent numerical instabilities. 
+
+This is followed by a 50 ps NVT ensemble run takes place to thermalize the system to the desired temperature using the velocity rescaling thermostat.41 Subsequently, a second energy minimization step, again using the steepest descent algorithm further relaxes the system to Etol < 100kJmol<sup>-1</sup>nm<sup>-1</sup> to allow for larger time steps that enhance its time-advancing capabilities. 
+
 The system is then equilibrated in the NPT ensemble for 500 ps to resolve any remaining unstable interatomic forces.
 
 ## Instructions for Running KMC-MD Simulation:
