@@ -11,6 +11,7 @@ Please check lines 46-64 of kmc-md/main.py file for the necessary Python package
 
 # How does it work?
 ![image](https://github.com/kmc-md/KMC-MD/assets/165834656/33e70717-1763-467c-92c6-ed30997e6262)
+Our framework leverages MD to maintain a Boltzmann distribution of states, and KMC to model reactions and structural changes efficiently. Integrating high-resolution techniques such as Molecular Dynamics (MD) with KMC is crucial for accurately maintaining the system in thermodynamically relevant configurations on its potential energy surface (PES).  On the other hand, atomistic MD simulations, while detailed, are limited by the short time steps (1 fs = 10-15 s) to accurately capture atomic vibrations, in that way restricting simulations to microseconds.32 Overall, the inherent limitations of MD necessitate a combination with KMC to both preserve the atomic-scale detail and extend the simulation timescales significantly (10^3 – 10^6 s).
 
 # Instructions for Running KMC-MD Simulation:
 This script was created for the execution of Kinetic Monte Carlo (KMC) coupled with Molecular Dynamics (MD) simulations, for studying the dehydrochlorination (DHC) process of PVC. 
