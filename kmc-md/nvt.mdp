@@ -1,0 +1,62 @@
+; VARIOUS PREPROCESSING OPTIONS
+title                    = NPT_simulation (constant number, pressure and temperature)
+cpp                      = /usr/bin/cpp
+define                   = -DPORSES
+
+; RUN CONTROL PARAMETERS
+integrator               = md
+dt                       = 0.001 ; ps, 1 fs
+nsteps                   = 50000 ; 50 ps
+
+; OUTPUT CONTROL OPTIONS
+nstxout                  = 15000 ; Writing full precision coordinates d
+nstvout                  = 15000 ; Writing velocities d
+nstfout                  = 0     ; Not writing forces
+nstlog                   = 15000  ; Writing to the log file 
+nstenergy                = 15000 ; Writing out energy information 
+nstxtcout                = 15000  ; Writing coordinates 
+xtc_precision            = 15000
+xtc-grps                 = System
+energygrps               = System     
+
+; NEIGHBORSEARCHING PARAMETERS
+nstlist                  = 10
+ns-type                  = Grid
+pbc                      = xyz
+rlist 			= 1.0 ; r cutoff
+rcoulomb 		= 1.0
+rvdw 			= 1.0
+vdwtype       		= cut-off
+; OPTIONS FOR ELECTROSTATICS AND VDW
+coulombtype              = PME
+pme_order                = 4
+fourierspacing           = 0.12 
+
+; Temperature coupling  
+Tcoupl                   = v-rescale
+tc-grps                  = System    
+tau_t                    = 0.1   
+ref_t                    = 300
+ 
+; Pressure coupling     
+Pcoupl                   = no
+
+;annealing 				= single
+;annealing-npoints		= 5
+;annealing-time 			= 0 10000 20000 30000 35000
+;annealing-temp			= 800 300 800 300 800 
+
+; GENERATE VELOCITIES FOR STARTUP RUN
+;gen_vel                  = no  ; Assign velocities to partiCLes by taking them randomly from a Maxwell distribution
+;gen_temp                 = 303  ; Temperature to generate corresponding Maxwell distribution
+;gen_seed                 = -1   ; Seed for (semi) random number generation.
+
+
+; OPTIONS FOR BONDS    
+constraints              = hbonds
+;constraints              = all-bonds
+constraint-algorithm     = lincs
+;continuation             = yes
+;shake-tol                = 0.0001
+lincs_iter              = 1
+lincs_order             = 4
