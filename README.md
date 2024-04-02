@@ -17,25 +17,19 @@ Our framework leverages MD to maintain a Boltzmann distribution of states, and K
 # KMC stage
 The KMC stage starts with parsing the quilibrated structure and topology. The local environment of each H site of PVC is assessed using the rate equation below:
 ```
-r = Ck * (e^{\frac{E_a}{RT}}\),
+r = Ck * e^(Ea/RT),
 ```
 
 where 
 
 - `C = 1` when `d > rc`,
-- otherwise, `C = (e^{-\frac{d}{r_c}}\)`.
-
-```
-
-To represent the exponentials and fractions more clearly, you might write:
-
-- \(e^{\frac{E_a}{RT}}\) for the exponential term,
-- \(e^{-\frac{d}{r_c}}\) for the conditional definition of \(C\).
+- otherwise, `C = e^(-d/rc)`.
 
 ```
 where r represents the reaction rate (s-1), k is the Arrhenius prefactor (s-1), Ea is the activation energy (kJmol-1), R is the universal gas constant, T is the system temperature, d is the distance between the H atom of PVC and O atom of NaOH, and rc is a predetermined cutoff radius of 0.4 nm based on the first solvation shell. 
 Once the reaction rates are calculated for each H site of PVC, a global event list is assembled. A reaction event is then selected based on the Metropolis algorithm49 such that:
-∑_(j=1)^k▒R_ij ≥u_2 R_t  ≥ ∑_(j=1)^(k-1)▒R_ij 									(3)
+&sum;<sub>j=1</sub><sup>k</sup> R<sub>ij</sub> &ge; u<sub>2</sub> R<sub>t</sub> &ge; &sum;<sub>j=1</sub><sup>k-1</sup> R<sub>ij</sub>
+
 where k is an integer corresponding to the selected reaction event, u2 is a second uniformly distributed random number within [0,1] and Rij is the rate of the system moving from state Si to state Sj.  Upon selecting an event, the simulation clock is then stochastically advanced to select and implement the reaction using the formula:
 Δt=  (-ln⁡(u_1))/R_t 												(4)
 where Δt is the time increment, u1 is a uniformly distributed random number in the range [0, 1] and Rt is the cumulative rate from the global event list. 
