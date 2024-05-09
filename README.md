@@ -2,7 +2,7 @@
 An Integrated Off-Lattice Kinetic Monte Carlo (KMC)-Molecular Dynamics (MD) Framework for modeling PVC dehydrochlorination process
 
 ## Please note: 
-The code was run on a GeForce RTX 3090 using a 16-core GPU with the following software installed:
+The code was run using a 16-core GPU with the following software installed:
 - GROMACS v. 2022.4 (https://www.gromacs.org/)
 - Python3 3.10.12 (https://www.python.org/downloads/release/python-31012/)
 - MDAnalysis package (https://www.mdanalysis.org/)
