@@ -14,25 +14,27 @@ Please check lines 46-64 of kmc-md/main.py file for the necessary Python package
 
 Our framework leverages MD to maintain a Boltzmann distribution of states, and KMC to model reactions and structural changes efficiently. 
 
-Integrating high-resolution techniques such as Molecular Dynamics (MD) with KMC is crucial for accurately maintaining the system in thermodynamically relevant configurations on its potential energy surface (PES).  On the other hand, atomistic MD simulations, while detailed, are limited by the short time steps (1 fs = 10<sup>-15</sup> s) to accurately capture atomic vibrations, in that way restricting simulations to microseconds. 
+A balanced approach for modeling reactions in amorphous polymer systems can be achieved by combining classical MD simulations with KMC, in which the model system is subjected to alternating stages of MD and KMC.  
 
-Overall, the inherent limitations of MD necessitate a combination with KMC to both preserve the atomic-scale detail and extend the simulation timescales significantly (10<sup>3</sup> – 10<sup>6</sup> s).
+While such an integrated approach forfeits the exact evolution of the system in phase space, it provides orders-of-magnitude increases in timescales accessible (10<sup>3</sup> – 10<sup>3</sup> s), which are relevant to common experimental observables (e.g., reaction kinetics).  At the same time, it captures important atomistic configurational aspects (mixing, correlations, clustering, etc.) that are lost in traditional microkinetic models.  
+
+The MD simulation stages help ensure configurational relaxation at short times, while the KMC stages can significantly propagate the system through time via direct sampling of the reaction coordinates.
 
 ### KMC stage
-The KMC stage starts with parsing the quilibrated structure and topology. The local environment of each H site of PVC is assessed using the rate equation below:
+The KMC stage starts with parsing the equilibrated structure and topology. The local environment of each H site of PVC is assessed using the rate equation below:
 
-![fig16](https://github.com/kmc-md/KMC-MD/assets/165834656/6ccfb48d-866b-48b5-9f8a-684c356c8006)
+![eq1](https://github.com/kmc-md/KMC-MD/assets/165834656/f1d109fd-0cf9-4329-b36a-456184165816)
 
 where r represents the reaction rate (s<sup>-1</sup>), k is the Arrhenius prefactor (s<sup>-1</sup>), Ea is the activation energy (kJmol<sup>-1</sup>), R is the universal gas constant, T is the system temperature, d is the distance between the H atom of PVC and O atom of NaOH, and rc is a predetermined cutoff radius of 0.4 nm based on the first solvation shell. 
 Once the reaction rates are calculated for each H site of PVC, a global event list is assembled. 
 
 A reaction event is then selected based on the Metropolis algorithm such that:
 
-![fig13](https://github.com/kmc-md/KMC-MD/assets/165834656/2ad9595f-f59f-4838-9687-c0f4e04311bf)
+![eq2](https://github.com/kmc-md/KMC-MD/assets/165834656/608bee7f-4653-42b0-a56b-f982e957da05)
 
 where k is an integer corresponding to the selected reaction event, u2 is a second uniformly distributed random number within [0,1] and Rij is the rate of the system moving from state Si to state Sj.  Upon selecting an event, the simulation clock is then stochastically advanced to select and implement the reaction using the formula:
 
-![fig14](https://github.com/kmc-md/KMC-MD/assets/165834656/8c7526e8-caa7-424c-b2bf-683eedd333a5)
+![eq3](https://github.com/kmc-md/KMC-MD/assets/165834656/ad2b547c-d72d-4c84-b43a-ce378aacf42f)
 
 where Δt is the time increment, u1 is a uniformly distributed random number in the range [0, 1] and Rt is the cumulative rate from the global event list. 
 The spatial and bonded interaction parameters of each atom are also updated.
