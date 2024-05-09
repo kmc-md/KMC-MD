@@ -16,7 +16,7 @@ Our framework leverages MD to maintain a Boltzmann distribution of states, and K
 
 A balanced approach for modeling reactions in amorphous polymer systems can be achieved by combining classical MD simulations with KMC, in which the model system is subjected to alternating stages of MD and KMC.  
 
-While such an integrated approach forfeits the exact evolution of the system in phase space, it provides orders-of-magnitude increases in timescales accessible (10<sup>3</sup> – 10<sup>3</sup> s), which are relevant to common experimental observables (e.g., reaction kinetics).  At the same time, it captures important atomistic configurational aspects (mixing, correlations, clustering, etc.) that are lost in traditional microkinetic models.  
+While such an integrated approach forfeits the exact evolution of the system in phase space, it provides orders-of-magnitude increases in timescales accessible (10<sup>3</sup> – 10<sup>5</sup> s), which are relevant to common experimental observables (e.g., reaction kinetics).  At the same time, it captures important atomistic configurational aspects (mixing, correlations, clustering, etc.) that are lost in traditional microkinetic models.  
 
 The MD simulation stages help ensure configurational relaxation at short times, while the KMC stages can significantly propagate the system through time via direct sampling of the reaction coordinates.
 
