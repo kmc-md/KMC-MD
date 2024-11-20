@@ -90,7 +90,7 @@ Key Configuration Parameters:
 Ensure that all modifications align with the specific requirements of your simulation.
 
 ## References
-1. Olowookere F.V. and C.H. Turner, An Integrated Off-Lattice Kinetic Monte Carlo (KMC)-Molecular Dynamics (MD) Framework for Modeling Polyvinyl Chloride Dehydrochlorination (manuscript in progress)
+1. Olowookere F.V. and C.H. Turner, An Integrated Off-Lattice Kinetic Monte Carlo (KMC)-Molecular Dynamics (MD) Framework for Modeling Polyvinyl Chloride Dehydrochlorination. Chem. Eng. Sci. 2025, 302, 120928.
 2. Metropolis, N. and S. Ulam, The monte carlo method. Journal of the American statistical association, 1949, 44 (247),  335-341.
 3. Van Rossum, G. and F.L. Drake, Python/C Api manual-python 3. 2009.
 4. Naughton, F.B., I. Alibay, J. Barnoud, E. Barreto-Ojeda, O. Beckstein, C. Bouysset, O. Cohen, R.J. Gowers, H. MacDermott-Opeskin, and M. Matta, MDAnalysis 2.0 and beyond: fast and interoperable, community driven simulation analysis. Biophysical Journal, 2022, 121 (3),  272a-273a.
