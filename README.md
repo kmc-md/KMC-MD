@@ -10,7 +10,7 @@ The code was run using a 16-core GPU with the following software installed:
 Please check lines 46-64 of kmc-md/main.py file for the necessary Python packages to be installed.
 
 ## How does it work?
-![kmc-md](https://github.com/kmc-md/KMC-MD/assets/165834656/c9cb82cb-4576-4778-8f27-1d7cae36826e)
+![1-s2 0-S0009250924012284-gr2_lrg](https://github.com/user-attachments/assets/74983a9d-5151-4f98-b0dc-718b17b6bf29)
 
 Our framework leverages MD to maintain a Boltzmann distribution of states, and KMC to model reactions and structural changes efficiently. 
 
